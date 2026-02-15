@@ -14,34 +14,66 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum BookingStatus {
+  PENDING // Bloqueia o horário temporariamente enquanto paga
+  CONFIRMED // Pagamento confirmado
+  CANCELLED // Pagamento falhou ou foi cancelado
+}
+
+model User {
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  passwordHash String? // Caso use Auth próprio, ou use provider ID
+  salons       Salon[] // Um usuário pode ser dono de salões
+  createdAt    DateTime @default(now())
+}
+
 model Salon {
-  id String @id @default(uuid())
-  name String
-  address String
-  phones String[]
-  imageUrl String
-  createdAt DateTime @default(now())
+  id          String   @id @default(uuid())
+  name        String
+  description String? // Bom para SEO
+  address     String
+  phones      String[]
+  imageUrl    String
+  ownerId     String // Relação com a dona
+  owner       User     @relation(fields: [ownerId], references: [id])
+
   services SalonService[]
+  bookings Booking[]
+
+  // Sugestão: Tabela separada ou JSON para horários de funcionamento
+  openingHours Json? // Ex: { "seg": ["09:00", "18:00"] }
+
+  createdAt DateTime @default(now())
 }
 
 model SalonService {
-  id String @id @default(uuid())
-  name String
-  description String
-  imageUrl String
-  salonId String
-  salon Salon @relation(fields: [salonId], references: [id])
+  id           String @id @default(uuid())
+  name         String
+  description  String
+  imageUrl     String
   priceInCents Int
+  durationMin  Int // Importante para calcular slots de agenda
 
+  salonId  String
+  salon    Salon     @relation(fields: [salonId], references: [id])
+  bookings Booking[]
 }
 
 model Booking {
-  id String @id @default(uuid())
-  serviceId String
-  salonId String
-  date DateTime @db.Timestamptz()
-  cancelled Boolean? @default(false)
-  cancelledAt DateTime? @db.Timestamptz()
-  customerName String
+  id     String        @id @default(uuid())
+  date   DateTime      @db.Timestamptz()
+  status BookingStatus @default(PENDING) // Regra de negócio vital
+
+  customerName  String
   customerPhone String
+
+  serviceId String
+  service   SalonService @relation(fields: [serviceId], references: [id])
+
+  salonId String
+  salon   Salon  @relation(fields: [salonId], references: [id])
+
+  createdAt DateTime @default(now())
 }
