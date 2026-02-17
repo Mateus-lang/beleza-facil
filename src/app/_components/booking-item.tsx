@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
+import { Avatar, AvatarImage } from './ui/avatar';
 import { Badge } from './ui/badge';
 import { Card } from './ui/card';
 
@@ -36,7 +36,9 @@ const BookingItem = ({
         <p className="text-xs capitalize">
           {date.toLocaleDateString([], { month: 'long' })}
         </p>
-        <p className='text-2xl'>{date.toLocaleDateString([], { day: '2-digit' })}</p>
+        <p className="text-2xl">
+          {date.toLocaleDateString([], { day: '2-digit' })}
+        </p>
         <p className="text-xs">
           {date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
         </p>
