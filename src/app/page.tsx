@@ -5,6 +5,13 @@ import banner from '../../public/banner.png';
 import BookingItem from './_components/booking-item';
 import { prisma } from '@/lib/prisma';
 import SalonItem from './_components/salon-item';
+import Footer from './_components/footer';
+import {
+  PageContainer,
+  PageSection,
+  PageSectionScroller,
+  PageSectionTitle,
+} from './_components/ui/page';
 
 export default async function Home() {
   const recomendedSalons = await prisma.salon.findMany({
@@ -14,9 +21,9 @@ export default async function Home() {
   });
   const salons = await prisma.salon.findMany();
   return (
-    <div>
+    <main>
       <Header />
-      <div className="space-y-4 p-5">
+      <PageContainer>
         <SearchInput />
         <Image
           src={banner}
@@ -24,34 +31,36 @@ export default async function Home() {
           sizes="100vw"
           className="h-auto w-full py-5"
         />
-        <h2 className="text-foreground text-xs font-semibold uppercase">
-          Agendamentos
-        </h2>
-        <BookingItem
-          serviceName="Corte de Cabelo"
-          salonName="Beleza Fácil"
-          salonImageUrl="https://i.ibb.co/wFmry8zX/04.png"
-          date={new Date()}
-        />
 
-        <h2 className="text-foreground text-xs font-semibold uppercase">
-          Recomendados
-        </h2>
-        <div className="flex gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden">
-          {recomendedSalons.map((salon) => (
-            <SalonItem key={salon.id} salon={salon} />
-          ))}
-        </div>
+        <PageSection>
+          <PageSectionTitle>Agendamentos</PageSectionTitle>
+          <BookingItem
+            serviceName="Corte de Cabelo"
+            salonName="Beleza Fácil"
+            salonImageUrl="https://i.ibb.co/wFmry8zX/04.png"
+            date={new Date()}
+          />
+        </PageSection>
 
-        <h2 className="text-foreground text-xs font-semibold uppercase">
-          Populares
-        </h2>
-        <div className="flex gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden">
-          {salons.map((salon) => (
-            <SalonItem key={salon.id} salon={salon} />
-          ))}
-        </div>
-      </div>
-    </div>
+        <PageSection>
+          <PageSectionTitle>Recomendados</PageSectionTitle>
+          <PageSectionScroller>
+            {recomendedSalons.map((salon) => (
+              <SalonItem key={salon.id} salon={salon} />
+            ))}
+          </PageSectionScroller>
+        </PageSection>
+
+        <PageSection>
+          <PageSectionTitle>Populares</PageSectionTitle>
+          <PageSectionScroller>
+            {salons.map((salon) => (
+              <SalonItem key={salon.id} salon={salon} />
+            ))}
+          </PageSectionScroller>
+        </PageSection>
+      </PageContainer>
+      <Footer />
+    </main>
   );
 }
