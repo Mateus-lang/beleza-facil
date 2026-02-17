@@ -1,0 +1,10 @@
+{
+  "chat.mcp.serverSampling": {
+    "beleza-facil/.vscode/mcp.json: io.github.upstash/context7": {
+      "allowedModels": ["copilot/auto", "copilot/claude-opus-4.5"]
+    },
+    "beleza-facil/.vscode/mcp.json: com.figma.mcp/mcp": {
+      "allowedModels": ["copilot/auto", "copilot/claude-opus-4.5"]
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import { Salon } from '@/generated/prisma/client';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface SalonItemProps {
   salon: Salon;
@@ -7,7 +8,7 @@ interface SalonItemProps {
 
 const SalonItem = ({ salon }: SalonItemProps) => {
   return (
-    <div className="relative min-h-50 min-w-72.5 rounded-xl p-4">
+    <Link href={`/salons/${salon.id}`} className="relative min-h-50 min-w-72.5 rounded-xl p-4">
       <div className="absolute top-0 left-0 z-10 h-full w-full rounded-lg bg-linear-to-t from-black to-transparent" />
       <Image
         src={salon.imageUrl}
@@ -19,7 +20,7 @@ const SalonItem = ({ salon }: SalonItemProps) => {
         <h3 className="text-lg font-bold text-white">{salon.name}</h3>
         <p className="text-sm text-white">{salon.address}</p>
       </div>
-    </div>
+    </Link>
   );
 };
 
