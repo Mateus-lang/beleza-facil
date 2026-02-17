@@ -1,15 +1,13 @@
-import { PrismaClient } from "@/generated/prisma/client"
+import { PrismaClient } from "@/generated/prisma/client";
 
-
-
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 async function seedDatabase() {
   try {
     // Limpar tabelas antes de inserir novos dados
-    await prisma.salonService.deleteMany()
-    await prisma.salon.deleteMany()
-    await prisma.user.deleteMany()
+    await prisma.salonService.deleteMany();
+    await prisma.salon.deleteMany();
+    await prisma.user.deleteMany();
 
     const images = [
       "https://i.ibb.co/wFmry8zX/04.png",
@@ -33,7 +31,7 @@ async function seedDatabase() {
       "https://i.ibb.co/bMbv6Wzn/05.png",
       "https://i.ibb.co/SSr60xm/02.png",
       "https://i.ibb.co/v4nQmL70/03.png",
-    ]
+    ];
     // Nomes criativos para as barbearias
     const creativeNames = [
       "Salão Vintage",
@@ -46,7 +44,7 @@ async function seedDatabase() {
       "Preta Doce",
       "Estilo Urbano",
       "Estilo Clássico",
-    ]
+    ];
 
     // Endereços fictícios para as barbearias
     const addresses = [
@@ -60,7 +58,7 @@ async function seedDatabase() {
       "Praça da Aparência, 505",
       "Rua Urbana, 606",
       "Avenida Clássica, 707",
-    ]
+    ];
 
     const services = [
       {
@@ -73,7 +71,8 @@ async function seedDatabase() {
       },
       {
         name: "Corte e Modelagem",
-        description: "Corte especializado que valoriza a textura natural.",
+        description:
+          "Corte especializado que valoriza a textura natural.",
         priceInCents: 6000,
         imageUrl: "https://i.ibb.co/SSr60xm/02.png",
         durationMin: 15,
@@ -108,48 +107,75 @@ async function seedDatabase() {
         imageUrl: "https://i.ibb.co/VYp3Z8J8/06.png",
         durationMin: 5,
       },
-    ]
+    ];
 
     // Dados dos proprietários dos salões
     const owners = [
-      { name: "Maria Silva", email: "maria.silva@salon.com" },
+      {
+        name: "Maria Silva",
+        email: "maria.silva@salon.com",
+      },
       { name: "Ana Costa", email: "ana.costa@salon.com" },
-      { name: "Carolina Mendes", email: "carolina.mendes@salon.com" },
-      { name: "Juliana Rodrigues", email: "juliana.rodrigues@salon.com" },
-      { name: "Fernanda Oliveira", email: "fernanda.oliveira@salon.com" },
-      { name: "Beatriz Santos", email: "beatriz.santos@salon.com" },
-      { name: "Amanda Ferreira", email: "amanda.ferreira@salon.com" },
-      { name: "Natália Pereira", email: "natalia.pereira@salon.com" },
-      { name: "Isadora Gomes", email: "isadora.gomes@salon.com" },
-      { name: "Patricia Alves", email: "patricia.alves@salon.com" },
-    ]
+      {
+        name: "Carolina Mendes",
+        email: "carolina.mendes@salon.com",
+      },
+      {
+        name: "Juliana Rodrigues",
+        email: "juliana.rodrigues@salon.com",
+      },
+      {
+        name: "Fernanda Oliveira",
+        email: "fernanda.oliveira@salon.com",
+      },
+      {
+        name: "Beatriz Santos",
+        email: "beatriz.santos@salon.com",
+      },
+      {
+        name: "Amanda Ferreira",
+        email: "amanda.ferreira@salon.com",
+      },
+      {
+        name: "Natália Pereira",
+        email: "natalia.pereira@salon.com",
+      },
+      {
+        name: "Isadora Gomes",
+        email: "isadora.gomes@salon.com",
+      },
+      {
+        name: "Patricia Alves",
+        email: "patricia.alves@salon.com",
+      },
+    ];
 
     // Criar usuários proprietários
-    const createdOwners = []
+    const createdOwners = [];
     for (const owner of owners) {
       const user = await prisma.user.create({
         data: {
           name: owner.name,
           email: owner.email,
         },
-      })
-      createdOwners.push(user)
+      });
+      createdOwners.push(user);
     }
 
     // Criar 10 barbearias com nomes e endereços fictícios
     const salons: {
-      id: string
-      name: string
-      address: string
-      imageUrl: string
-      ownerId: string
-      phones: string[]
-      description: string | null
-    }[] = []
+      id: string;
+      name: string;
+      address: string;
+      imageUrl: string;
+      ownerId: string;
+      phones: string[];
+      description: string | null;
+    }[] = [];
     for (let i = 0; i < 10; i++) {
-      const name = creativeNames[i]
-      const address = addresses[i]
-      const imageUrl = images[i]
+      const name = creativeNames[i];
+      const address = addresses[i];
+      const imageUrl = images[i];
 
       const salon = await prisma.salon.create({
         data: {
@@ -161,7 +187,7 @@ async function seedDatabase() {
           description:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac augue ullamcorper, pharetra orci mollis, auctor tellus. Phasellus pharetra erat ac libero efficitur tempus. Donec pretium convallis iaculis. Etiam eu felis sollicitudin, cursus mi vitae, iaculis magna. Nam non erat neque. In hac habitasse platea dictumst. Pellentesque molestie accumsan tellus id laoreet.",
         },
-      })
+      });
 
       for (const service of services) {
         await prisma.salonService.create({
@@ -177,17 +203,17 @@ async function seedDatabase() {
             },
             imageUrl: service.imageUrl,
           },
-        })
+        });
       }
 
-      salons.push(salon)
+      salons.push(salon);
     }
 
     // Fechar a conexão com o banco de dados
-    await prisma.$disconnect()
+    await prisma.$disconnect();
   } catch (error) {
-    console.error("Erro ao criar os salões:", error)
+    console.error("Erro ao criar os salões:", error);
   }
 }
 
-seedDatabase()
+seedDatabase();
