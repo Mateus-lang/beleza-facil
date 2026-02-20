@@ -11,6 +11,7 @@
     "format:check": "prettier --check \"src/**/*.{ts,tsx,json,css,md}\""
   },
   "dependencies": {
+    "@clerk/nextjs": "^6.37.5",
     "@prisma/client": "^6.19.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
