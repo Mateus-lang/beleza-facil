@@ -12,6 +12,7 @@ import {
   PageSectionScroller,
   PageSectionTitle,
 } from './_components/ui/page';
+import QuickSearchButtons from './_components/quick-search-buttons';
 
 export default async function Home() {
   const recomendedSalons = await prisma.salon.findMany({
@@ -25,11 +26,12 @@ export default async function Home() {
       <Header />
       <PageContainer>
         <SearchInput />
+        <QuickSearchButtons />
         <Image
           src={banner}
           alt="Banner Agende Agora!"
           sizes="100vw"
-          className="h-auto w-full py-5"
+          className="h-auto w-full py-2"
         />
 
         <PageSection>

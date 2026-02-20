@@ -4,7 +4,7 @@ import { useClerk, useUser } from '@clerk/nextjs';
 import { Separator } from './ui/separator';
 import { Avatar, AvatarImage } from './ui/avatar';
 import { Button } from './ui/button';
-import { CalendarDays, House, LogInIcon, LogOut } from 'lucide-react';
+import {  CalendarDaysIcon, HomeIcon, LogInIcon, LogOut } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { SheetClose } from './ui/sheet';
 import Link from 'next/link';
@@ -42,8 +42,6 @@ const SidebarMenu = () => {
               {session.user.emailAddresses[0]?.emailAddress}
             </p>
           </div>
-
-          
         </div>
       ) : (
         <div className="flex items-center justify-between px-5">
@@ -65,10 +63,10 @@ const SidebarMenu = () => {
           <Link href="/">
             <Button
               variant="ghost"
-              className="w-full justify-start gap-3 rounded-full px-5 py-3 font-medium"
+              className="h-auto w-full justify-start gap-3 rounded-full px-5 py-3"
             >
-              <House className="h-4 w-4" />
-              Início
+              <HomeIcon className="size-4" />
+              <span className="text-sm font-medium">Início</span>
             </Button>
           </Link>
         </SheetClose>
@@ -76,10 +74,10 @@ const SidebarMenu = () => {
           <Link href="/bookings">
             <Button
               variant="ghost"
-              className="w-full justify-start gap-3 rounded-full px-5 py-3 font-medium"
+              className="h-auto w-full justify-start gap-3 rounded-full px-5 py-3"
             >
-              <CalendarDays className="h-4 w-4" />
-              Agendamentos
+              <CalendarDaysIcon className="size-4" />
+              <span className="text-sm font-medium">Agendamentos</span>
             </Button>
           </Link>
         </SheetClose>
