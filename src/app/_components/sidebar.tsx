@@ -4,7 +4,7 @@ import { useClerk, useUser } from '@clerk/nextjs';
 import { Separator } from './ui/separator';
 import { Avatar, AvatarImage } from './ui/avatar';
 import { Button } from './ui/button';
-import {  CalendarDaysIcon, HomeIcon, LogInIcon, LogOut } from 'lucide-react';
+import { CalendarDaysIcon, HomeIcon, LogInIcon, LogOut } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { SheetClose } from './ui/sheet';
 import Link from 'next/link';
@@ -63,7 +63,7 @@ const SidebarMenu = () => {
           <Link href="/">
             <Button
               variant="ghost"
-              className="h-auto w-full justify-start gap-3 rounded-full px-5 py-3"
+              className="h-auto w-full justify-start gap-3 rounded-full py-3"
             >
               <HomeIcon className="size-4" />
               <span className="text-sm font-medium">Início</span>
@@ -74,7 +74,7 @@ const SidebarMenu = () => {
           <Link href="/bookings">
             <Button
               variant="ghost"
-              className="h-auto w-full justify-start gap-3 rounded-full px-5 py-3"
+              className="h-auto w-full justify-start gap-3 rounded-full py-3"
             >
               <CalendarDaysIcon className="size-4" />
               <span className="text-sm font-medium">Agendamentos</span>
@@ -87,53 +87,45 @@ const SidebarMenu = () => {
 
       {/* Menu Items */}
       <div className="flex flex-col gap-1 px-5">
-        <Link href="#">
-          <Button
-            variant="ghost"
-            className="h-10 w-full justify-start rounded-full px-5 py-3 font-medium"
-          >
-            Trança
-          </Button>
+        <Link
+          href="/salons?search=trança"
+          className="hover:bg-primary/10 h-auto w-full cursor-pointer rounded-full px-5 py-1"
+        >
+          <span className="text-sm font-medium">Trança</span>
         </Link>
-        <Link href="#">
-          <Button
-            variant="ghost"
-            className="h-10 w-full justify-start rounded-full px-5 py-3 font-medium"
-          >
-            Fibra
-          </Button>
+
+        <Link
+          href="/salons?search=fibra"
+          className="hover:bg-primary/10 h-auto w-full cursor-pointer rounded-full px-5 py-1"
+        >
+          <span className="text-sm font-medium">Fibra</span>
         </Link>
-        <Link href="#">
-          <Button
-            variant="ghost"
-            className="h-10 w-full justify-start rounded-full px-5 py-3 font-medium"
-          >
-            Hidratação
-          </Button>
+
+        <Link
+          href="/salons?search=hidratação"
+          className="hover:bg-primary/10 h-auto w-full cursor-pointer rounded-full px-5 py-1"
+        >
+          <span className="text-sm font-medium">Hidratação</span>
         </Link>
-        <Link href="#">
-          <Button
-            variant="ghost"
-            className="h-10 w-full justify-start rounded-full px-5 py-3 font-medium"
-          >
-            Sombrancelha
-          </Button>
+
+        <Link
+          href="/salons?search=sobrancelha"
+          className="hover:bg-primary/10 h-auto w-full cursor-pointer rounded-full px-5 py-1"
+        >
+          <span className="text-sm font-medium">Sobrancelha</span>
         </Link>
-        <Link href="#">
-          <Button
-            variant="ghost"
-            className="h-10 w-full justify-start rounded-full px-5 py-3 font-medium"
-          >
-            Massagem
-          </Button>
+
+        <Link
+          href="/salons?search=massagem"
+          className="hover:bg-primary/10 h-auto w-full cursor-pointer rounded-full px-5 py-1"
+        >
+          <span className="text-sm font-medium">Massagem</span>
         </Link>
-        <Link href="#">
-          <Button
-            variant="ghost"
-            className="h-10 w-full justify-start rounded-full px-5 py-3 font-medium"
-          >
-            Finalização
-          </Button>
+        <Link
+          href="/salons?search=finalização"
+          className="hover:bg-primary/10 h-auto w-full cursor-pointer rounded-full px-5 py-1"
+        >
+          <span className="text-sm font-medium">Finalização</span>
         </Link>
       </div>
 
